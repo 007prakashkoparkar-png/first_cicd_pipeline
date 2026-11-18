@@ -10,13 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
     - name: Build Image
       run: docker build -t 007prakashkoparkar/my-devops-app:latest .
+
     - name: Log in to Docker Hub
-  env:
-    DOCKER_USER: ${{ vars.DOCKERHUB_USERNAME }}
-    DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-     run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
+      env:
+        DOCKER_USER: ${{ vars.DOCKERHUB_USERNAME }}
+        DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      run: echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
+
     - name: Push Image
       run: docker push 007prakashkoparkar/my-devops-app:latest
 
