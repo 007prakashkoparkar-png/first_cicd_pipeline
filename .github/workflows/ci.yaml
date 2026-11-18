@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -23,4 +23,15 @@ jobs:
 
       - name: Push Image
         run: docker push 007prakashkoparkar/my-devops-app:latest
+
+      - name: Setup Kubernetes Context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+      - name: Deploy to Kubernetes Cluster
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl rollout restart deployment/my-devops-app
 

@@ -1,0 +1,38 @@
+# k8s/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-devops-app
+  labels:
+    app: my-devops-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-devops-app
+  template:
+    metadata:
+      labels:
+        app: my-devops-app
+    spec:
+      containers:
+      - name: my-devops-app
+        image: 007prakashkoparkar/my-devops-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80 # The port your app runs on inside the container
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-devops-app-service
+spec:
+  type: NodePort      # 👈 Changed from LoadBalancer to NodePort
+  selector:
+    app: my-devops-app
+  ports:
+    - protocol: TCP
+      port: 80         # The internal service port
+      targetPort: 80   # The port inside your container
+      nodePort: 32000  # 👈 Exposes your app externally on port 32000 across all cluster nodes
+
