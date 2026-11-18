@@ -11,9 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build Image
-      run: docker build -t <dockerhub-username>/my-devops-app:latest .
+      run: docker build -t 007prakashkoparkar/my-devops-app:latest .
     - name: Login Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
     - name: Push Image
-      run: docker push <dockerhub-username>/my-devops-app:latest
+      run: docker push 007prakashkoparkar/my-devops-app:latest
 
