@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # 👈 Updates the pipeline to run locally on your k8s-master node
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -24,14 +24,14 @@ jobs:
       - name: Push Image
         run: docker push 007prakashkoparkar/my-devops-app:latest
 
-      - name: Setup Kubernetes Context
-        uses: azure/k8s-set-context@v4
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
         with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}
+          version: 'v3.12.0'
 
-      - name: Deploy to Kubernetes Cluster
+      - name: Deploy Chart to Kubernetes
         run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl rollout restart deployment/my-devops-app
+          helm upgrade --install my-devops-app ./my-devops-chart \
+            --set image.tag=latest \
+            --reuse-values
 
