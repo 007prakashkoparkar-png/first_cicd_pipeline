@@ -13,7 +13,7 @@ jobs:
     - name: Build Image
       run: docker build -t 007prakashkoparkar/my-devops-app:latest .
     - name: Login Docker Hub
-      run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
     - name: Push Image
       run: docker push 007prakashkoparkar/my-devops-app:latest
 
