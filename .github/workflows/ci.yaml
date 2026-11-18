@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy Chart to Kubernetes
         run: |
-          helm upgrade --install my-devops-app ./my-devops-chart \
+          helm upgrade --install my-devops-app ./first_cicd_pipeline \
             --set image.tag=latest \
             --reuse-values
 
