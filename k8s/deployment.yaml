@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: my-devops-app
-        image: 007prakashkoparkar/my-devops-app:latest
+        image: 007prakashkoparkar/my-cicd-app:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 80 # The port your app runs on inside the container
