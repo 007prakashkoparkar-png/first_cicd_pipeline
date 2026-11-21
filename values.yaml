@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 007prakashkoparkar/my-devops-image
+  repository: 007prakashkoparkar/my-cicd-image:v1
   tag: latest
   pullPolicy: Always
 
