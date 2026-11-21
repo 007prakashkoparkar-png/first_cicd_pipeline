@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy Chart to Kubernetes
         run: |
-          helm upgrade --install my-devops-app . \
+          helm upgrade --uninstall my-devops-app  \
             --set image.tag=latest \
             --reuse-values
 
