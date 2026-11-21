@@ -31,4 +31,5 @@ jobs:
 
       - name: Deploy Chart to Kubernetes
         run: |
+          helm uninstall my-devops-app || true
           helm install my-devops-app .
